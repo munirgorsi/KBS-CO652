@@ -12,7 +12,12 @@ mortgage_advisor :-
                "What is your annual income before Tax(£)?", 
                "What is the expected value of the property you want to buy?(£)",
                "How much deposit do you have (£)?", 
-               "Do you have any existing loans?"], 
+               "Do you have any existing loans?"],
+              "What is your current credit score?",
+              "How long have you been employed? (in years)",
+              "Are you a first-time buyer?",
+              "What is your marital status?",
+              "Do you have any dependents?"],
               Answers),
     write('Your answers: '),
     write(Answers),
@@ -28,11 +33,27 @@ questions([Question|RestQuestions], [Answer|RestAnswers]) :-
     questions(RestQuestions, RestAnswers).
 
 % Evaluate eligibility based on answers
-evaluate_eligibility([Age, Income, PropertyValue, Deposit, _]) :-
-    (   Deposit >= 0.2 * PropertyValue, % Check if deposit is at least 20% of property value
-        Income >= 0.05 * PropertyValue  % Check if annual income is at least 5% of property value (UK standard)
-    ->  write('Congratulations! You are eligible for the mortgage.'), nl
-    ;   write('Unfortunately, you are not eligible for the mortgage. You need to improve your credit score'), nl
-    ).
+evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, EmploymentDuration, FirstTimeBuyer, MaritalStatus, Dependents]) :-
+    rule_1(Age),
+    rule_2(Income, PropertyValue),
+    rule_3(Deposit, PropertyValue),
+    rule_4(Loans),
+    rule_5(CreditScore),
+    rule_6(EmploymentDuration),
+    rule_7(FirstTimeBuyer),
+    rule_8(MaritalStatus),
+    rule_9(Dependents),
+    rule_10(Income, PropertyValue),
+    rule_11(Age),
+    rule_12(EmploymentDuration, Income),
+    rule_13(FirstTimeBuyer),
+    rule_14(MaritalStatus),
+    rule_15(Deposit),
+    rule_16(Loans),
+    rule_17(CreditScore),
+    rule_18(Age, PropertyValue),
+    rule_19(Income, PropertyValue),
+    rule_20(Loans).
+).
 
  
