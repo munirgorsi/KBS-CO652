@@ -79,4 +79,11 @@ rule_4('no') :- !.
 rule_4('yes') :-
     write('You must have no existing loans or manageable debt to qualify for the mortgage.'), nl, fail.
 
+
+
+% Rule 5: Credit score should be above a threshold (e.g., 600)
+rule_5(CreditScore) :-
+    CreditScore >= 600, !.
+rule_5(_) :-
+    write('Your credit score is too low for mortgage approval. A minimum score of 600 is required.'), nl, fail.
  
