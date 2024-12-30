@@ -54,6 +54,12 @@ evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, E
     rule_18(Age, PropertyValue),
     rule_19(Income, PropertyValue),
     rule_20(Loans).
+
+% Rule 1: Age should be at least 18
+rule_1(Age) :-
+    Age >= 18, !.
+rule_1(_) :-
+    write('You must be at least 18 years old to apply for a mortgage.'), nl, fail.
 ).
 
  
