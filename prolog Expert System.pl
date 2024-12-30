@@ -60,6 +60,12 @@ rule_1(Age) :-
     Age >= 18, !.
 rule_1(_) :-
     write('You must be at least 18 years old to apply for a mortgage.'), nl, fail.
+
+% Rule 2: Income should be at least 10% of the property value
+rule_2(Income, PropertyValue) :-
+    Income >= 0.05 * PropertyValue, !.
+rule_2(_, _) :-
+    write('Your income should be at least 5% of the property value.'), nl, fail.
 ).
 
  
