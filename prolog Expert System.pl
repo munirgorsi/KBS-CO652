@@ -61,11 +61,17 @@ rule_1(Age) :-
 rule_1(_) :-
     write('You must be at least 18 years old to apply for a mortgage.'), nl, fail.
 
-% Rule 2: Income should be at least 10% of the property value
+% Rule 2: Income should be at least 5% of the property value
 rule_2(Income, PropertyValue) :-
     Income >= 0.05 * PropertyValue, !.
 rule_2(_, _) :-
     write('Your income should be at least 5% of the property value.'), nl, fail.
+
+% Rule 3: Deposit should be at lesat 20% of the property value
+rule_3(Deposit,PropertyValue) :-
+Deposit >= 0.2 * PropertyValue, !.
+rule_3(_,_) :-
+write('YourDeposit should be at lesat 20% of the property value. ') nl, fail.
 ).
 
  
