@@ -74,4 +74,9 @@ rule_3(_,_) :-
 write('YourDeposit should be at lesat 20% of the property value. ') nl, fail.
 ).
 
+% Rule 4: No existing loans or manageable debt
+rule_4('no') :- !.
+rule_4('yes') :-
+    write('You must have no existing loans or manageable debt to qualify for the mortgage.'), nl, fail.
+
  
