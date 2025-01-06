@@ -40,6 +40,7 @@ evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, E
     rule_5(CreditScore),
     rule_6(EmploymentDuration),
     rule_7(FirstTimeBuyer),
+    rule_8(MaritalStatus),
 
 % Rule 1: Age should be at least 18
 rule_1(Age) :-
@@ -81,3 +82,6 @@ rule_6(_) :-
 rule_7('yes') :-
     write('As a first-time buyer, you may have access to special mortgage terms.'), nl, !.
 rule_7(_) :- !.
+% Rule 8: Marital status can affect the mortgage terms (e.g., joint applications)
+rule_8('married') :- !.
+rule_8('single') :- !.
