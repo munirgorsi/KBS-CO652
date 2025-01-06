@@ -3,16 +3,15 @@
 % Interface name: mortgage_advisor
 
 % Entry point for the expert system
-mortgage_advisor :-
-    write('Well Come to Simple Mortgage Expert System Build By Mohammad Qasim Matloob and Muhammad Munir.'),
+    write('Well Come to Simple Mortgage Expert System Build up By Mohammad Qasim Matloob and Muhammad Munir.'),
     nl,
-    write('To check eligibility for the mortgage, please answer the following questions:'),
+    write('Please respond to the following questions in order to verify your mortgage eligibility:'),
     nl,
     questions(["What is your age?", 
                "What is your annual income before Tax(£)?", 
-               "What is the expected value of the property you want to buy?(£)",
+               "Expected value of the property you want to buy?(£)",
                "How much deposit do you have (£)?", 
-               "Do you have any existing loans?"],
+               "Do you have any existing loans?",
               "What is your current credit score?",
               "How long have you been employed? (in years)",
               "Are you a first-time buyer?",
@@ -58,7 +57,6 @@ rule_3(Deposit,PropertyValue) :-
 Deposit >= 0.2 * PropertyValue, !.
 rule_3(_,_) :-
 write('YourDeposit should be at lesat 20% of the property value. ') nl, fail.
-).
 
 % Rule 4: No existing loans or manageable debt
 rule_4('no') :- !.
