@@ -38,7 +38,7 @@ evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, E
     rule_3(Deposit, PropertyValue),
     rule_4(Loans),
     rule_5(CreditScore),
-   
+    rule_6(EmploymentDuration),
 
 % Rule 1: Age should be at least 18
 rule_1(Age) :-
@@ -70,3 +70,8 @@ rule_5(CreditScore) :-
 rule_5(_) :-
     write('Your credit score is too low for mortgage approval. A minimum score of 600 is required.'), nl, fail.
  
+% Rule 6: Employment duration should be at least 1 year
+rule_6(EmploymentDuration) :-
+    EmploymentDuration >= 1, !.
+rule_6(_) :-
+    write('You must have been employed for at least 1 year.'), nl, fail.
