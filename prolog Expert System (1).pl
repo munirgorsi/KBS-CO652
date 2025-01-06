@@ -41,6 +41,7 @@ evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, E
     rule_6(EmploymentDuration),
     rule_7(FirstTimeBuyer),
     rule_8(MaritalStatus),
+    rule_9(Dependents),
 
 % Rule 1: Age should be at least 18
 rule_1(Age) :-
@@ -85,3 +86,7 @@ rule_7(_) :- !.
 % Rule 8: Marital status can affect the mortgage terms (e.g., joint applications)
 rule_8('married') :- !.
 rule_8('single') :- !.
+% Rule 9: Dependents can affect mortgage eligibility based on financial stability
+rule_9('yes') :-
+    write('Having dependents can influence your mortgage eligibility depending on your income and expenses.'), nl, !.
+rule_9(_) :- !.
