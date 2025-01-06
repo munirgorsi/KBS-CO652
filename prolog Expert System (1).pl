@@ -39,21 +39,7 @@ evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, E
     rule_3(Deposit, PropertyValue),
     rule_4(Loans),
     rule_5(CreditScore),
-    rule_6(EmploymentDuration),
-    rule_7(FirstTimeBuyer),
-    rule_8(MaritalStatus),
-    rule_9(Dependents),
-    rule_10(Income, PropertyValue),
-    rule_11(Age),
-    rule_12(EmploymentDuration, Income),
-    rule_13(FirstTimeBuyer),
-    rule_14(MaritalStatus),
-    rule_15(Deposit),
-    rule_16(Loans),
-    rule_17(CreditScore),
-    rule_18(Age, PropertyValue),
-    rule_19(Income, PropertyValue),
-    rule_20(Loans).
+   
 
 % Rule 1: Age should be at least 18
 rule_1(Age) :-
