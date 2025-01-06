@@ -39,6 +39,7 @@ evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, E
     rule_4(Loans),
     rule_5(CreditScore),
     rule_6(EmploymentDuration),
+    rule_7(FirstTimeBuyer),
 
 % Rule 1: Age should be at least 18
 rule_1(Age) :-
@@ -75,3 +76,8 @@ rule_6(EmploymentDuration) :-
     EmploymentDuration >= 1, !.
 rule_6(_) :-
     write('You must have been employed for at least 1 year.'), nl, fail.
+
+% Rule 7: First-time buyers may have more favorable terms
+rule_7('yes') :-
+    write('As a first-time buyer, you may have access to special mortgage terms.'), nl, !.
+rule_7(_) :- !.
