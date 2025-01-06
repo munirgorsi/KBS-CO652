@@ -42,6 +42,7 @@ evaluate_eligibility([Age, Income, PropertyValue, Deposit, Loans, CreditScore, E
     rule_7(FirstTimeBuyer),
     rule_8(MaritalStatus),
     rule_9(Dependents),
+    rule_10(Income, PropertyValue),
 
 % Rule 1: Age should be at least 18
 rule_1(Age) :-
@@ -90,3 +91,8 @@ rule_8('single') :- !.
 rule_9('yes') :-
     write('Having dependents can influence your mortgage eligibility depending on your income and expenses.'), nl, !.
 rule_9(_) :- !.
+% Rule 10: Income should be able to cover mortgage repayments
+rule_10(Income, PropertyValue) :-
+    Income >= 0.03 * PropertyValue, !.
+rule_10(_, _) :-
+    write('Your income should be able to cover the expected mortgage repayments.'), nl, fail.
