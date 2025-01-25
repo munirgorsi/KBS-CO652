@@ -145,3 +145,31 @@ evaluate_mortgage(Income, CreditScore, EmploymentStatus, BorrowAmount, DownPayme
         nl, write('Your debt-to-income ratio is acceptable.') ;
         write('Debt-to-income ratio too high. Please work on reducing debt before applying.'), nl, fail),
 
+% Professional Rule 16: Employment Status check (no "self-employed" option)
+    (EmploymentStatus \= unemployed ->
+        nl, write('Employment status is acceptable.') ;
+        write('Employment status is not acceptable for mortgage approval.'), nl, fail),
+   
+    % Professional Rule 17: Age Range check (between 18 and 70)
+    (Age >= 18, Age =< 70 ->
+        nl, write('Age is acceptable.') ;
+        write('Age is out of acceptable range. You must be between 18 and 70 years old to apply for a mortgage.'), nl, fail),
+   
+    % Professional Rule 18: Home Ownership History check
+    (HomeOwnershipHistory == yes ->
+        nl, write('Home ownership history is considered positive for mortgage approval.') ;
+        write('Home ownership history is not necessary but may impact your loan terms.'), nl),
+   
+    % Rule 19 If all checks are passed, show acceptance message
+    nl,
+    write('************************************************************'), nl,
+    write('                 Congratulations!'), nl,
+    write('        Your mortgage application is ACCEPTED!'), nl,
+    write('************************************************************'), nl.
+ 
+% In case of failure (any condition not met), show rejection message
+evaluate_mortgage(_, _, _, _, _, _, _, _, _, _) :-
+    write('************************************************************'), nl,
+    write('                     MORTGAGE REJECTED'), nl,
+    write('    Unfortunately, you do not meet the eligibility criteria.'), nl,
+    write('************************************************************'), nl.
