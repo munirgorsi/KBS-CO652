@@ -99,3 +99,49 @@ ask_down_payment(DownPayment) :-
         % If down payment is invalid, ask again
         write('Down payment must be non-negative.'), nl, ask_down_payment(DownPayment)).
  
+% Confirmation rule: double-check user input for borrow amount and down payment
+confirm_input(Prompt, Value, Yes) :-
+    % Prompt the user for confirmation of the entered value
+    write(Prompt), write(Value), write('. Is this correct? (yes/no) '), read(Yes), nl.
+ 
+% Evaluate mortgage eligibility with additional professional rules
+evaluate_mortgage(Income, CreditScore, EmploymentStatus, BorrowAmount, DownPayment, Age, HomeOwnership, MortgageTerm, MonthlyDebt, HomeOwnershipHistory) :-
+    % Displaying the user's input summary
+    write('Thank you for providing the information!'), nl,
+    write('Here is the summary of your inputs:'), nl,
+    write('Income: '), write(Income), nl,
+    write('Credit Score: '), write(CreditScore), nl,
+    write('Employment Status: '), write(EmploymentStatus), nl,
+    write('Borrow Amount: '), write(BorrowAmount), nl,
+    write('Down Payment: '), write(DownPayment), nl,
+    write('Age: '), write(Age), nl,
+    write('Home Ownership: '), write(HomeOwnership), nl,
+    write('Mortgage Term: '), write(MortgageTerm), nl,
+    write('Monthly Debt: '), write(MonthlyDebt), nl,
+    write('Previous Mortgage: '), write(HomeOwnershipHistory), nl,
+   
+    % Professional Rule 11: Income check (must be >= 50,000)
+    (Income >= 50000 ->
+        nl, write('Income is acceptable.') ;
+        write('Income too low. Please reassess.'), nl, fail),
+   
+    % Professional Rule 12: Credit Score check (must be >= 650)
+    (CreditScore >= 650 ->
+        nl, write('Credit score is acceptable.') ;
+        write('Credit score too low. Please reassess.'), nl, fail),
+   
+    % Professional Rule 13: Down Payment check (must be >= 20,000)
+    (DownPayment >= 20000 ->
+        nl, write('Down payment is sufficient.') ;
+        write('Down payment too low. Please reconsider your savings.'), nl, fail),
+   
+    % Professional Rule 14: Borrow Amount check (must be <= 5 times the income)
+    (BorrowAmount =< (Income * 5) ->
+        nl, write('Borrow amount is acceptable relative to income.') ;
+        write('Borrow amount too high. You may need to reassess the amount you want to borrow.'), nl, fail),
+   
+    % Professional Rule 15: Debt-to-Income Ratio (DTI) check (must be < 40%)
+    (MonthlyDebt / Income < 0.4 ->
+        nl, write('Your debt-to-income ratio is acceptable.') ;
+        write('Debt-to-income ratio too high. Please work on reducing debt before applying.'), nl, fail),
+
