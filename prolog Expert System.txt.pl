@@ -35,16 +35,6 @@ start :-
     
     % Evaluate the mortgage eligibility based on the user's input
     evaluate_mortgage(Income, CreditScore, EmploymentStatus, BorrowAmount, DownPayment, Age, HomeOwnership, MortgageTerm, MonthlyDebt, HomeOwnershipHistory).
-<<<<<<< HEAD
-    % Rule 1: Ask for income
-ask_income(Income) :- 
-    % Asking the user for their income
-    write('What is your income? '), read(TempIncome), nl,
-    
-    % Check if the income is above a threshold of 25,000 for mortgage eligibility
-    (TempIncome >= 25000 -> 
-        Income = TempIncome ; 
-=======
 
 % Rule 1: Ask for income
 ask_income(Income) :-
@@ -54,63 +44,62 @@ ask_income(Income) :-
     % Check if the income is above a threshold of 25,000 for mortgage eligibility
     (TempIncome >= 25000 ->
         Income = TempIncome ;
->>>>>>> d7b2cadbdd97b916f5ff828626875b7277f41c9d
         % If income is too low, prompt the user to reassess
         write('Income too low for mortgage. Please reassess.'), nl, fail).
 
 % Rule 2: Ask for credit score
-<<<<<<< HEAD
-ask_credit_score(CreditScore) :- 
+ask_credit_score(CreditScore) :-
     % Asking the user for their credit score
     write('What is your credit score? '), read(TempCreditScore), nl,
-    
+   
     % Check if the credit score is within the valid range (600 - 999)
-    (TempCreditScore >= 600, TempCreditScore =< 999 -> 
-        CreditScore = TempCreditScore ; 
+    (TempCreditScore >= 600, TempCreditScore =< 999 ->
+        CreditScore = TempCreditScore ;
         % If the credit score is invalid, prompt the user to enter a valid score
         write('Invalid credit score. Please enter a valid credit score between 600 and 999.'), nl, ask_credit_score(CreditScore)).
-
+ 
 % Rule 3: Ask for employment status
-ask_employment_status(EmploymentStatus) :- 
+ask_employment_status(EmploymentStatus) :-
     % Asking the user for their employment status (options: employed, unemployed, retired)
     write('What is your employment status? (employed, unemployed, retired) '), read(TempEmploymentStatus), nl,
-    
+   
     % Check if the employment status is valid
-    (member(TempEmploymentStatus, [employed, unemployed, retired]) -> 
-        EmploymentStatus = TempEmploymentStatus ; 
+    (member(TempEmploymentStatus, [employed, unemployed, retired]) ->
+        EmploymentStatus = TempEmploymentStatus ;
         % If invalid, ask the user to enter a valid response
         write('Invalid input. Please enter one of: employed, unemployed, or retired: '), nl, ask_employment_status(EmploymentStatus)).
-
+ 
 % Rule 4: Ask for borrow amount with double-check
-ask_borrow_amount(BorrowAmount) :- 
+ask_borrow_amount(BorrowAmount) :-
     % Asking the user for the borrow amount
     write('How much would you like to borrow? '), read(TempBorrowAmount), nl,
-    
+   
     % Ensure that the borrow amount is greater than 0
-    (TempBorrowAmount > 0 -> 
+    (TempBorrowAmount > 0 ->
         % Double-checking the borrow amount
-        confirm_input('The amount you want to borrow is ', TempBorrowAmount, Yes), 
-        (Yes == yes -> 
-            BorrowAmount = TempBorrowAmount ; 
+        confirm_input('The amount you want to borrow is ', TempBorrowAmount, Yes),
+        (Yes == yes ->
+            BorrowAmount = TempBorrowAmount ;
             ask_borrow_amount(BorrowAmount)) ;
         % If borrow amount is invalid, ask again
         write('Borrow amount must be greater than 0.'), nl, ask_borrow_amount(BorrowAmount)).
-
+ 
 % Rule 5: Ask for down payment with double-check
-ask_down_payment(DownPayment) :- 
+ask_down_payment(DownPayment) :-
     % Asking the user for their down payment
     write('What is your down payment? '), read(TempDownPayment), nl,
-    
+   
     % Ensure the down payment is non-negative
-    (TempDownPayment >= 0 -> 
+    (TempDownPayment >= 0 ->
         % Double-checking the down payment amount
-        confirm_input('Your down payment is ', TempDownPayment, Yes), 
-        (Yes == yes -> 
-            DownPayment = TempDownPayment ; 
+        confirm_input('Your down payment is ', TempDownPayment, Yes),
+        (Yes == yes ->
+            DownPayment = TempDownPayment ;
             ask_down_payment(DownPayment)) ;
         % If down payment is invalid, ask again
         write('Down payment must be non-negative.'), nl, ask_down_payment(DownPayment)).
-% Rule 6: Ask for age
+<<<<<<< HEAD
+ % Rule 6: Ask for age
 ask_age(Age) :- 
     % Asking the user for their age
     write('What is your age? '), read(TempAge), nl,
@@ -165,55 +154,5 @@ ask_previous_mortgage(HomeOwnershipHistory) :-
         % If invalid response, ask again
         write('Invalid response. Please answer with yes or no.'), nl, ask_previous_mortgage(HomeOwnershipHistory)).
 =======
-ask_credit_score(CreditScore) :-
-    % Asking the user for their credit score
-    write('What is your credit score? '), read(TempCreditScore), nl,
-   
-    % Check if the credit score is within the valid range (600 - 999)
-    (TempCreditScore >= 600, TempCreditScore =< 999 ->
-        CreditScore = TempCreditScore ;
-        % If the credit score is invalid, prompt the user to enter a valid score
-        write('Invalid credit score. Please enter a valid credit score between 600 and 999.'), nl, ask_credit_score(CreditScore)).
- 
-% Rule 3: Ask for employment status
-ask_employment_status(EmploymentStatus) :-
-    % Asking the user for their employment status (options: employed, unemployed, retired)
-    write('What is your employment status? (employed, unemployed, retired) '), read(TempEmploymentStatus), nl,
-   
-    % Check if the employment status is valid
-    (member(TempEmploymentStatus, [employed, unemployed, retired]) ->
-        EmploymentStatus = TempEmploymentStatus ;
-        % If invalid, ask the user to enter a valid response
-        write('Invalid input. Please enter one of: employed, unemployed, or retired: '), nl, ask_employment_status(EmploymentStatus)).
- 
-% Rule 4: Ask for borrow amount with double-check
-ask_borrow_amount(BorrowAmount) :-
-    % Asking the user for the borrow amount
-    write('How much would you like to borrow? '), read(TempBorrowAmount), nl,
-   
-    % Ensure that the borrow amount is greater than 0
-    (TempBorrowAmount > 0 ->
-        % Double-checking the borrow amount
-        confirm_input('The amount you want to borrow is ', TempBorrowAmount, Yes),
-        (Yes == yes ->
-            BorrowAmount = TempBorrowAmount ;
-            ask_borrow_amount(BorrowAmount)) ;
-        % If borrow amount is invalid, ask again
-        write('Borrow amount must be greater than 0.'), nl, ask_borrow_amount(BorrowAmount)).
- 
-% Rule 5: Ask for down payment with double-check
-ask_down_payment(DownPayment) :-
-    % Asking the user for their down payment
-    write('What is your down payment? '), read(TempDownPayment), nl,
-   
-    % Ensure the down payment is non-negative
-    (TempDownPayment >= 0 ->
-        % Double-checking the down payment amount
-        confirm_input('Your down payment is ', TempDownPayment, Yes),
-        (Yes == yes ->
-            DownPayment = TempDownPayment ;
-            ask_down_payment(DownPayment)) ;
-        % If down payment is invalid, ask again
-        write('Down payment must be non-negative.'), nl, ask_down_payment(DownPayment)).
  
 >>>>>>> d7b2cadbdd97b916f5ff828626875b7277f41c9d
