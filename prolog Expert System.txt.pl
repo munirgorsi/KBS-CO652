@@ -99,4 +99,3 @@ ask_down_payment(DownPayment) :-
         % If down payment is invalid, ask again
         write('Down payment must be non-negative.'), nl, ask_down_payment(DownPayment)).
  
-test
