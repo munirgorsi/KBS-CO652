@@ -1,7 +1,7 @@
 % Main rule to start the system
 start :-
     % Welcome message
-    write('Welcome to the Mortgage Advisor Expert System build up by Mohammad Qasim Matloob & Muhammad Munir!'), nl,
+    write('Welcome to the Mortgage Advisor Expert System build up by Mohammad Qasim Matloob & Muhammad Munir!.'), nl,
    
     % Asking the user for their income
     ask_income(Income),
